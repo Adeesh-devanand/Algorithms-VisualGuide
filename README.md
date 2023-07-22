@@ -14,7 +14,6 @@ Algorithm-VisualGuide is a Java application built using JavaFX that allows users
 - [Contact](#contact)
 
 ## Demo
--
 
 ## Features
 - Interactive GUI with intuitive controls for users to customize input data and algorithm parameters.
@@ -29,7 +28,6 @@ Algorithm-VisualGuide is a Java application built using JavaFX that allows users
 4. Build and run the application from your IDE.
 
 ## Usage
--
 
 ## Algorithms Included
 The application currently supports the visualization of the following algorithms:
