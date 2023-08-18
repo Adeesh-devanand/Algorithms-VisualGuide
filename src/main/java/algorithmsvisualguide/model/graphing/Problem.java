@@ -1,5 +1,7 @@
 package algorithmsvisualguide.model.graphing;
 
+import kotlin.Pair;
+
 import java.util.ArrayList;
 
 public class Problem {
@@ -7,9 +9,10 @@ public class Problem {
     ArrayList<Integer> edgList;
     Bot alg;
 
-    //Effects: Creates a problem with an Adjacency matrix loaded
-    Problem(ArrayList<ArrayList<Integer>> adjList) {
+    //Effects: creates a problem with an Adjacency matrix and algorithm
+    Problem(ArrayList<ArrayList<Integer>> adjList, Algorithms ch) {
         this.adjList = adjList;
+        setAlg(ch);
 
         edgList = new ArrayList<>();
         adjList.forEach(edgList :: addAll);
@@ -31,9 +34,9 @@ public class Problem {
     }
 
     //Effects: returns the next edge that the algorithm visited,
-    // returns -1 if there are no edges left
-    int getEdge() {
-        return alg.step().component1();
+    // returns null if there are no edges left
+    Integer getEdge() {
+        return alg.step();
     }
 
     //Effects: checks if the problem is solvable with the given alg

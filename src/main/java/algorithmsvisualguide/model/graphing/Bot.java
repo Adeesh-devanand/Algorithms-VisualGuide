@@ -1,7 +1,6 @@
 package algorithmsvisualguide.model.graphing;
 
-import algorithmsvisualguide.model.exception.InvalidVerticesException;
-import kotlin.Pair;
+import algorithmsvisualguide.exceptions.InvalidVerticesException;
 
 import java.util.ArrayList;
 
@@ -25,9 +24,9 @@ public interface Bot {
     int getEnd();
 
     //Modifies: this
-    //Effects: returns the next edge(in serial format) and vertice visited,
-    // -1 if there are no edges left
-    Pair<Integer, Integer> step();
+    //Effects: returns the next edge(in serial format) visited,
+    // null if there are no edges left
+    Integer step();
 
     //Requires: adjList, start, end must be loaded
     //Modifies: this
