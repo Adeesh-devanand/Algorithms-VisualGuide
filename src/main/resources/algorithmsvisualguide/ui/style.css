@@ -1,0 +1,6 @@
+.scroll-pane {
+    -fx-background-image: url('background.jpg');
+        -fx-background-repeat: no-repeat;
+        -fx-background-size: cover; /* or contain, based on your preference */
+        -fx-background-color: transparent;
+}

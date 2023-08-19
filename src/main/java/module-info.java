@@ -9,6 +9,4 @@ module algorithmsvisualguide {
 //    exports algorithmsvisualguide;
     exports algorithmsvisualguide.ui;
     opens algorithmsvisualguide.ui to javafx.fxml;
-    exports algorithmsvisualguide.viewModel;
-    opens algorithmsvisualguide.viewModel to javafx.fxml;
 }

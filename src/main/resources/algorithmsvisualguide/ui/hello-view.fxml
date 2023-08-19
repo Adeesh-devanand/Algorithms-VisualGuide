@@ -2,33 +2,55 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algorithmsvisualguide.ui.Controller">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@background.jpg" />
-         </image>
-      </ImageView>
-      <ButtonBar layoutX="81.0" layoutY="338.0" prefHeight="47.0" prefWidth="413.0">
-        <buttons>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #FFC300;">
+          <Circle fx:id="vertice" layoutX="157.0" layoutY="115.0" onDragDetected="#onDragDetected" onMouseDragged="#onMouseDragged" radius="20.0" stroke="BLACK" strokeLineCap="ROUND" strokeWidth="2.0">
+         <effect>
+            <InnerShadow choke="0.52" />
+         </effect>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <Pane layoutX="214.0" layoutY="36.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox alignment="CENTER" layoutY="353.0" prefHeight="47.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #FFC300;">
                <opaqueInsets>
                   <Insets />
-               </opaqueInsets></Button>
-            <Region prefHeight="200.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #FFC300;" />
-            <Region prefHeight="24.0" prefWidth="200.0" />
-            <ChoiceBox prefWidth="150.0" style="-fx-background-color: #FFC300; -fx-background-radius: 30 30 30 30;" />
-        </buttons>
-      </ButtonBar>
-
-       <StackPane layoutX="173.0" layoutY="120.0" prefHeight="115.0" prefWidth="117.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-           <Circle fx:id="outerCircle" fill="#000000" radius="42.0" />
-           <Circle fx:id="innerCircle" fill="#FFFFFF" radius="32.0" />
-       </StackPane>
+               </opaqueInsets>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Region prefHeight="33.0" prefWidth="57.0" />
+            <Button fx:id="button1" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="26.0" prefWidth="66.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #FFC300;">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Region prefHeight="41.0" prefWidth="63.0" />
+            <ChoiceBox prefWidth="150.0" style="-fx-background-color: #FFC300; -fx-background-radius: 30 30 30 30;">
+               <effect>
+                  <DropShadow />
+               </effect></ChoiceBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
