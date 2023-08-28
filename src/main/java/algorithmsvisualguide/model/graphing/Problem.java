@@ -1,18 +1,18 @@
 package algorithmsvisualguide.model.graphing;
 
-import kotlin.Pair;
+import algorithmsvisualguide.exceptions.VerticeNotSetException;
 
 import java.util.ArrayList;
 
 public class Problem {
     ArrayList<ArrayList<Integer>> adjList;
     ArrayList<Integer> edgList;
-    Bot alg;
+    Bot bot;
 
     //Effects: creates a problem with an Adjacency matrix and algorithm
     Problem(ArrayList<ArrayList<Integer>> adjList, Algorithms ch) {
         this.adjList = adjList;
-        setAlg(ch);
+        setBot(ch);
 
         edgList = new ArrayList<>();
         adjList.forEach(edgList :: addAll);
@@ -20,7 +20,7 @@ public class Problem {
 
     //Modifies: this
     //Effects: chooses the algorithm to solve the problem
-    public void setAlg(Algorithms ch) {
+    private void setBot(Algorithms ch) {
         switch (ch) {
             case BFS:
                 break;
@@ -30,17 +30,17 @@ public class Problem {
                 break;
         }
 
-        alg.load(adjList);
+        bot.load(adjList);
     }
 
     //Effects: returns the next edge that the algorithm visited,
     // returns null if there are no edges left
-    Integer getEdge() {
-        return alg.step();
+    Integer getEdge() throws VerticeNotSetException {
+        return bot.step();
     }
 
     //Effects: checks if the problem is solvable with the given alg
-    boolean solvable() {
-        return alg.solvable();
+    boolean solvable() throws VerticeNotSetException {
+        return bot.solvable();
     }
 }
