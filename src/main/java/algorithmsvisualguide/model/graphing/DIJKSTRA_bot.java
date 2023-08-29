@@ -6,16 +6,16 @@ import algorithmsvisualguide.exceptions.VerticeNotSetException;
 
 import java.util.*;
 
-public class DFS_bot implements Bot{
+public class DIJKSTRA_bot implements Bot{
     ArrayList<ArrayList<Integer>> adjMatrix;
-    LinkedList<WeightedEdge> queue;
+    PriorityQueue<WeightedEdge> queue;
     Set<Integer> visited;
     Integer start;
     Integer end;
 
-    public DFS_bot(ArrayList<ArrayList<Integer>> adjMatrix) {
+    public DIJKSTRA_bot(ArrayList<ArrayList<Integer>> adjMatrix) {
         this.adjMatrix = adjMatrix;
-        this.queue = new LinkedList<>();
+        this.queue = new PriorityQueue<>();
         this.visited = new HashSet<>();
     }
 
@@ -23,7 +23,7 @@ public class DFS_bot implements Bot{
     public void setStart(int start) {
         this.start = start;
         queue.clear();
-        queue.push(new WeightedEdge(0, start, start));
+        queue.add(new WeightedEdge(start,0, start));
     }
 
     @Override
@@ -40,14 +40,10 @@ public class DFS_bot implements Bot{
     public int getEnd() {
         return end;
     }
-
-    @Override
     public WeightedEdge step() throws NoEdgesToTraverse {
-        WeightedEdge currEdge;
+        WeightedEdge currEdge = queue.poll();
 
-        try {
-            currEdge = queue.pop();
-        } catch (NoSuchElementException e) {
+        if (currEdge == null) {
             throw new NoEdgesToTraverse();
         }
 
@@ -58,9 +54,9 @@ public class DFS_bot implements Bot{
 
         for (int nextV = 0; nextV < adjWeights.size(); nextV++) {
             int nextW = adjWeights.get(nextV);
-            if (!visited.contains(nextV) && nextW != -1) {
+            if (nextW != -1 && !visited.contains(nextV)) {
                 visited.add(nextV);
-                queue.push(new WeightedEdge(currW+ nextW, currV, nextV));
+                queue.add(new WeightedEdge(currW + nextW, currV, nextV));
             }
         }
 
@@ -74,7 +70,7 @@ public class DFS_bot implements Bot{
         }
 
         queue.clear();
-        queue.push(new WeightedEdge(0, start, start));
+        queue.add(new WeightedEdge(0, start, start));
 
         while (true) {
             WeightedEdge currE;

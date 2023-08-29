@@ -1,22 +1,20 @@
 package algorithmsvisualguide.model.graphing;
 
 import algorithmsvisualguide.exceptions.InvalidVerticesException;
+import algorithmsvisualguide.exceptions.NoEdgesToTraverse;
 import algorithmsvisualguide.exceptions.VerticeNotSetException;
 
 import java.util.ArrayList;
 
 public interface Bot {
-    //Modifies: this
-    //Effects: loads the adjacency matrix into the bot
-    void load(ArrayList<ArrayList<Integer>> adj);
 
     //Modifies: this
     //Effects: sets a starting vertice
-    void setStart(int start) throws InvalidVerticesException;
+    void setStart(int start);
 
     //Modifies: this
     //Effects: sets an end vertice
-    void setEnd(int end) throws InvalidVerticesException;
+    void setEnd(int end);
 
     //Effects: gets start vertice
     int getStart();
@@ -25,9 +23,8 @@ public interface Bot {
     int getEnd();
 
     //Modifies: this
-    //Effects: returns the next edge(in serial format) visited,
-    // null if there are no edges left
-    Integer step() throws VerticeNotSetException;
+    //Effects: returns the next edge visited in the iteration,
+    WeightedEdge step() throws NoEdgesToTraverse;
 
     //Requires: adjList, start, end must be loaded
     //Modifies: this

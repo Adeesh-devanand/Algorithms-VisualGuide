@@ -4,6 +4,7 @@ module algorithmsvisualguide {
 
     requires org.controlsfx.controls;
     requires com.almasb.fxgl.all;
+    requires annotations;
 
 //    opens algorithmsvisualguide to javafx.fxml;
 //    exports algorithmsvisualguide;

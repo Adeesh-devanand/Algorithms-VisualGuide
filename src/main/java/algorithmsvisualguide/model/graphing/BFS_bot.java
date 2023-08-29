@@ -1,40 +1,33 @@
 package algorithmsvisualguide.model.graphing;
 
 import algorithmsvisualguide.exceptions.InvalidVerticesException;
+import algorithmsvisualguide.exceptions.NoEdgesToTraverse;
 import algorithmsvisualguide.exceptions.VerticeNotSetException;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class BFS_bot implements Bot{
     ArrayList<ArrayList<Integer>> adjMatrix;
-    LinkedList<Integer> queue;
+    LinkedList<WeightedEdge> queue;
     Set<Integer> visited;
     Integer start;
     Integer end;
 
-
-    @Override
-    public void load(ArrayList<ArrayList<Integer>> adj) {
-        adjMatrix =  adj;
+    public BFS_bot(ArrayList<ArrayList<Integer>> adjMatrix) {
+        this.adjMatrix = adjMatrix;
+        this.queue = new LinkedList<>();
+        this.visited = new HashSet<>();
     }
 
     @Override
-    public void setStart(int start) throws InvalidVerticesException {
-        if (start >= adjMatrix.size() || start < 0) {
-            throw new InvalidVerticesException();
-        }
+    public void setStart(int start){
         this.start = start;
         queue.clear();
-        queue.add(start);
+        queue.add(new WeightedEdge(0, start, start));
     }
 
     @Override
-    public void setEnd(int end) throws InvalidVerticesException {
-        if (end >= adjMatrix.size() || end < 0) {
-            throw new InvalidVerticesException();
-        }
+    public void setEnd(int end) {
         this.end = end;
     }
 
@@ -49,17 +42,29 @@ public class BFS_bot implements Bot{
     }
 
     @Override
-    public Integer step() {
-        int nextV = queue.pop();
-        ArrayList<Integer> adjWeights = adjMatrix.get(nextV);
+    public WeightedEdge step() throws NoEdgesToTraverse {
+        WeightedEdge currEdge;
 
-        for (int indexV = 0; indexV < adjWeights.size(); indexV++) {
-            if (!visited.contains(indexV) && adjWeights.get(indexV) != 0) {
-                queue.add(indexV);
+        try {
+            currEdge = queue.pop();
+        } catch (NoSuchElementException e) {
+            throw new NoEdgesToTraverse();
+        }
+
+        int currV = currEdge.getTo();
+        int currW = currEdge.getWeight();
+
+        ArrayList<Integer> adjWeights = adjMatrix.get(currV);
+
+        for (int nextV = 0; nextV < adjWeights.size(); nextV++) {
+            int nextW = adjWeights.get(nextV);
+            if (!visited.contains(nextV) && nextW != -1) {
+                visited.add(nextV);
+                queue.add(new WeightedEdge(currW+ nextW, currV, nextV));
             }
         }
 
-        return nextV;
+        return currEdge;
     }
 
     @Override
@@ -69,15 +74,18 @@ public class BFS_bot implements Bot{
         }
 
         queue.clear();
-        queue.add(start);
+        queue.add(new WeightedEdge(0, start, start));
 
-        while (!queue.isEmpty()) {
-            int nextV = step();
-            if (end.equals(nextV)) {
+        while (true) {
+            WeightedEdge currE;
+            try {
+                currE = step();
+            } catch (NoEdgesToTraverse e) {
+                return false;
+            }
+            if (end.equals(currE.getTo())) {
                 return true;
             }
         }
-
-        return false;
     }
 }
