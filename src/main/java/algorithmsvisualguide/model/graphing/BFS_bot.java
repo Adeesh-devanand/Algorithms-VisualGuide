@@ -1,6 +1,5 @@
 package algorithmsvisualguide.model.graphing;
 
-import algorithmsvisualguide.exceptions.InvalidVerticesException;
 import algorithmsvisualguide.exceptions.NoEdgesToTraverse;
 import algorithmsvisualguide.exceptions.VerticeNotSetException;
 
